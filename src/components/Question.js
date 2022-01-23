@@ -15,8 +15,12 @@ export default function Question(props) {
 
     return (
         <div>
-           <p>{props.question}</p>
-           {answerElements}
+           <h3 className="question">{props.question}</h3>
+           <div className="answer--container">
+                {answerElements}
+           </div>
+           
+           <hr className="question--divider"/>
         </div>
         
     )
