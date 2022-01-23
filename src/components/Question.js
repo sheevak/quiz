@@ -4,13 +4,19 @@ import he from "he"
 
 export default function Question(props) {
 
-    const answers = [...props.incorrect]
-    answers.push(props.correct)
+    //Making a list of all answers
+    const answers = [...props.incorrectAnswer]
+    answers.push(props.correctAnswer)
 
+    //Creating Answer components from the list of answers
     const answerElements = answers.map((el, ind) => 
         <Answer 
             key={ind}
-            ans={he.decode(el)}
+            questionId={props.questionId}
+            answerId={ind}
+            answer={he.decode(el)}
+            selected={props.selectedAnswer}
+            updateSelectedAnswer={props.updateSelectedAnswer}
         />)
 
     return (
