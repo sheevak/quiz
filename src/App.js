@@ -1,7 +1,18 @@
 import React from "react"
+import Home from "./components/Home"
+import Quiz from "./components/Quiz"
 
 export default function App() {
+
+    const [home, setHome] = React.useState(true)
+
+    function toggleHome() {
+        setHome(prevHome => !prevHome)
+    }
+
     return (
-        <h1>Test APP</h1>
+        <div className="container">
+            {home ? <Home toggle={toggleHome}/> : <Quiz />}
+        </div>
     )
 }
