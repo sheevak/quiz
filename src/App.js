@@ -10,7 +10,21 @@ export default function App() {
     React.useEffect(() => {
         fetch("https://opentdb.com/api.php?amount=5")
             .then(res => res.json())
-            .then(data => setQuizQs(data.results))
+            .then(data => {
+
+                //Merging the correct and incorrect answers into one array
+                const dataNew = data.results.map(question => {
+                    
+                    const allAnswers = [...question.incorrect_answers].map((el, ind) => ({id: ind, ans: el, correct: false}))
+                    //randomly inserting the correct answer into the array of incorrect answers.
+                    const index = Math.floor(Math.random()*(allAnswers.length+1));
+                    allAnswers.splice(index, 0, {id: allAnswers.length, ans: question.correct_answer, correct: true})
+                    return {...question, allAnswers: allAnswers}
+                });
+
+                setQuizQs(dataNew)
+            })
+            
     }, [])
     function toggleHome() {
         setHome(prevHome => !prevHome)

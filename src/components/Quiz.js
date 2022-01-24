@@ -3,7 +3,6 @@ import Question from "./Question"
 import he from "he"
 
 export default function Quiz(props) {
-
     //Tracks the selected answer for each question
     const [selectedAnswer, setSelectedAnswer] = React.useState({1: "", 2: "", 3: "", 4: "", 5: ""});
 
@@ -20,8 +19,11 @@ export default function Quiz(props) {
             key={ind}
             questionId={ind}
             question={he.decode(el.question)}
+
+            allAnswers={el.allAnswers}
             correctAnswer={el.correct_answer}
             incorrectAnswer={el.incorrect_answers}
+            
             updateSelectedAnswer={updateSelectedAnswer}
             selectedAnswer={selectedAnswer[ind]}
         />

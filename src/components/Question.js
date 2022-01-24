@@ -3,22 +3,17 @@ import Answer from "./Answer"
 import he from "he"
 
 export default function Question(props) {
-
-    //Making a list of incorrect answers
-    const answersObj = [...props.incorrectAnswer].map(el => ({ans: el, correct: false}));
-
-    //Adding the correct answer at a random index
-    const index = Math.floor(Math.random()*(answersObj.length+1));
-    answersObj.splice(index, 0, {ans: props.correctAnswer, correct: true})
+    console.log("Question:")
+    console.log(props)
 
     //Creating Answer components from the list of answers
-    const answerElements = answersObj.map((el, ind) => 
+    const answerElements = props.allAnswers.map((el) => 
         <Answer 
-            key={ind}
+            key={el.id}
+            answerId={el.id}
             questionId={props.questionId}
-            answerId={ind}
             answer={he.decode(el.ans)}
-            correct={el.correcr}
+            correct={el.correct}
             selected={props.selectedAnswer}
             updateSelectedAnswer={props.updateSelectedAnswer}
         />)
