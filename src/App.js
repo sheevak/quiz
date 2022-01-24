@@ -6,6 +6,7 @@ export default function App() {
 
     const [home, setHome] = React.useState(true);
     const [quizQs, setQuizQs] = React.useState("");
+    const [newGame, setNewGame] = React.useState(true);
 
     React.useEffect(() => {
         fetch("https://opentdb.com/api.php?amount=5")
@@ -15,24 +16,28 @@ export default function App() {
                 //Merging the correct and incorrect answers into one array
                 const dataNew = data.results.map(question => {
                     
-                    const allAnswers = [...question.incorrect_answers].map((el, ind) => ({id: ind, ans: el, correct: false}))
+                    const allAnswers = [...question.incorrect_answers].map((el, ind) => ({ans: el, correct: false}))
                     //randomly inserting the correct answer into the array of incorrect answers.
                     const index = Math.floor(Math.random()*(allAnswers.length+1));
-                    allAnswers.splice(index, 0, {id: allAnswers.length, ans: question.correct_answer, correct: true})
+                    allAnswers.splice(index, 0, {ans: question.correct_answer, correct: true})
                     return {...question, allAnswers: allAnswers}
                 });
 
                 setQuizQs(dataNew)
-            })
-            
-    }, [])
+            })   
+    }, [newGame])
+
     function toggleHome() {
         setHome(prevHome => !prevHome)
     }
 
+    function restartGame() {
+        setNewGame(prev => !prev)
+    }
+
     return (
         <div className="app-container">
-            {home ? <Home toggle={toggleHome}/> : <Quiz  quizQs={quizQs}/>}
+            {home ? <Home toggle={toggleHome}/> : <Quiz toggle={toggleHome} quizQs={quizQs} restartGame={restartGame}/>}
         </div>
     )
 }

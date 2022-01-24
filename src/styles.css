@@ -10,6 +10,10 @@ html, body {
 body {
     font-family: Karla, sans-serif;
     background-color: #F5F7FB;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .app-container {
@@ -18,6 +22,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    max-width: 1000px;
 }
 
 .home {
@@ -70,10 +75,9 @@ body {
 .answer--button {
     display: flex;
     align-items: center;
-    height: 25px;
     border: 0.75px solid #4D5B9E;
     border-radius: 8px;
-    padding: 0 12px;
+    padding: 5px 12px;
     color: #293264;
     font-size: 0.8em;
     cursor: pointer;
